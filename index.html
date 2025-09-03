@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Varad • Official Dating Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1320;        /* deep navy */
+      --bg-soft: #13182a;
+      --text: #e8ecf5;      /* off-white */
+      --muted: #98a2b3;     /* cool grey */
+      --brand: #d4a017;     /* classy gold */
+      --accent: #6aa9ff;    /* calm blue */
+      --card: #151a2f;
+      --ok: #22c55e;        /* green */
+      --warn: #f59e0b;      /* amber */
+      --bad: #ef4444;       /* red */
+      --radius: 18px;
+      --shadow: 0 20px 40px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -10%, #1a2040 0%, var(--bg) 60%) fixed;
+      background-color: var(--bg);
+      line-height: 1.65;
+      letter-spacing: 0.2px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; backdrop-filter: saturate(160%) blur(8px); background: rgba(15,19,32,.55); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; max-width: 1100px; margin: 0 auto; padding: 14px 20px; }
+    .brand { font-family: "Playfair Display", serif; font-weight: 800; font-size: 22px; letter-spacing: .4px; }
+    .tag { font-size: 12px; color: var(--muted); border: 1px solid rgba(255,255,255,.1); padding: 6px 10px; border-radius: 999px; }
+
+    .nav a.btn { background: linear-gradient(135deg, var(--brand), #f3cc4b); color: #1a1a1a; padding: 10px 14px; border-radius: 12px; font-weight: 700; box-shadow: var(--shadow); border: none; }
+    .nav a.btn:hover { filter: brightness(1.05); }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding-top: 48px; }
+    .headline { font-family: "Playfair Display", serif; font-weight: 800; font-size: clamp(28px, 3.6vw, 56px); line-height: 1.1; margin: 0 0 12px; }
+    .sub { color: var(--muted); font-size: 18px; }
+
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .pad { padding: 20px; }
+
+    .hero-ctas { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; font-weight: 700; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: #141a2b; color: var(--text); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), #f1c54a); color: #1b1b1b; border-color: transparent; }
+    .btn.ghost { background: transparent; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+
+    /* IMAGE BLOCK */
+    .portrait { position: relative; overflow: hidden; border-radius: var(--radius); aspect-ratio: 4/5; background: #0d1222; border: 1px solid rgba(255,255,255,.08); }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .96; }
+
+    /* Ribbon text that says "you have to accept it" */
+    .ribbon { position: absolute; top: 18px; left: -60px; transform: rotate(-12deg); background: linear-gradient(135deg, var(--ok), #61d892); color: #0a0a0a; font-weight: 900; letter-spacing: .6px; padding: 10px 60px; border-radius: 16px; box-shadow: var(--shadow); border: 2px dashed rgba(0,0,0,.2); text-transform: uppercase; }
+    .ribbon small { display: block; font-weight: 700; opacity: .8; }
+
+    /* SECTIONS */
+    section { margin-top: 52px; }
+    h2 { font-family: "Playfair Display", serif; font-size: clamp(22px, 2.6vw, 36px); margin: 0 0 16px; letter-spacing: .2px; }
+    p.lead { color: var(--muted); margin: 0 0 18px; }
+
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    /* INFO CARDS */
+    .info { padding: 18px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); }
+    .info h3 { margin: 0 0 8px; font-size: 18px; }
+    .info p { margin: 0; color: var(--muted); }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline:before { content: ""; position: absolute; left: 10px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(180deg, var(--accent), transparent); }
+    .dot { position: relative; padding-left: 14px; margin: 12px 0; }
+    .dot:before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(106,169,255,.15); }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; color: var(--text); }
+    th, td { padding: 12px 14px; border-bottom: 1px dashed rgba(255,255,255,.1); text-align: left; }
+    th { color: var(--muted); font-weight: 700; }
+
+    /* TESTIMONIALS */
+    .quote { font-style: italic; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; }
+
+    /* FOOTER */
+    footer { margin-top: 64px; padding: 24px 0 80px; color: var(--muted); text-align: center; border-top: 1px solid rgba(255,255,255,.06); background: linear-gradient(180deg, transparent, rgba(255,255,255,.02)); }
+
+    /* BADGES */
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge { border: 1px solid rgba(255,255,255,.1); padding: 6px 10px; border-radius: 999px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,.02); }
+
+    /* PROGRESS */
+    .meter { background: rgba(255,255,255,.06); border-radius: 999px; height: 10px; overflow: hidden; }
+    .bar { height: 100%; background: linear-gradient(90deg, var(--brand), #ffd978); width: var(--w, 50%); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .ribbon { transform: rotate(-8deg) translateX(28px); }
+      .grid.cols-3 { grid-template-columns: 1fr; }
+      .grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* FLAIR */
+    @keyframes floaty { from { transform: translateY(0); } 50% { transform: translateY(-6px); } to { transform: translateY(0); } }
+    .floaty { animation: floaty 6s ease-in-out infinite; }
+
+    .accent-line { height: 3px; width: 80px; background: linear-gradient(90deg, var(--brand), transparent); border-radius: 999px; margin: 10px 0 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="brand">Varad</div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span class="tag">Formal. Funny. Surprisingly dateable.</span>
+        <a class="btn" href="#contact">Express Interest</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="card pad">
+        <h1 class="headline">The Official Portfolio for Dating Me</h1>
+        <div class="accent-line"></div>
+        <p class="sub">Welcome. This site is a carefully curated blend of corporate professionalism and well‑timed humor. Consider it a due‑diligence document for your heart.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#about">Review Candidate</a>
+          <a class="btn ghost" href="#kpis">View Romance KPIs</a>
+          <a class="btn" href="#faq">Read the Fine Print</a>
+        </div>
+        <div class="badges" style="margin-top:14px;">
+          <span class="badge">Punctual texter</span>
+          <span class="badge">Tea & long walks</span>
+          <span class="badge">Memes with citations</span>
+          <span class="badge">Loyal like a version control system</span>
+        </div>
+      </div>
+
+      <figure class="portrait floaty">
+        <!-- If you open this file locally on your Windows PC, this path can work. 
+             Otherwise, place the image next to this HTML and set src="boy.jpg" (or the correct file name & extension). -->
+        <img src="C:/Users/varad/OneDrive/Desktop/New folder/boy.jpg" alt="Varad portrait" />
+        <figcaption class="ribbon">you have to accept it <small>(terms apply)</small></figcaption>
+      </figure>
+    </section>
+
+    <section id="about">
+      <h2>Executive Summary</h2>
+      <p class="lead">Results‑oriented human with a proven track record in making people laugh at inopportune times, remembering tiny details, and over‑engineering weekend plans. Seeking a long‑term partnership with generous snack‑sharing and mutual growth.</p>
+      <div class="grid cols-3">
+        <div class="info">
+          <h3>Strengths</h3>
+          <p>Active listener, zero ghosting policy, solid playlist management, and consistent coffee brewing uptime.</p>
+        </div>
+        <div class="info">
+          <h3>Opportunities</h3>
+          <p>May overuse puns. Will show you five dinner options and still ask what you want.</p>
+        </div>
+        <div class="info">
+          <h3>Risk Mitigation</h3>
+          <p>Open communication, honest apologies, and strategic dessert acquisitions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kpis">
+      <h2>Romance KPIs</h2>
+      <p class="lead">Because if we can’t measure it, how will we brag about it later?</p>
+      <div class="grid cols-2">
+        <div class="card pad">
+          <h3>Weekly Laugh Guarantee</h3>
+          <div class="meter" aria-label="Laughs per week"><div class="bar" style="--w: 90%"></div></div>
+          <p style="color:var(--muted); font-size:14px; margin-top:8px;">Target: 10+ proper laughs/week. Includes bad jokes that become good from repetition.</p>
+        </div>
+        <div class="card pad">
+          <h3>Plan Reliability</h3>
+          <div class="meter" aria-label="Plan reliability"><div class="bar" style="--w: 85%"></div></div>
+          <p style="color:var(--muted); font-size:14px; margin-top:8px;">Data shows high reliability with occasional spontaneous detours to bookshops.</p>
+        </div>
+      </div>
+      <div class="grid cols-3" style="margin-top:16px;">
+        <div class="info"><h3>Cooking ROI</h3><p>Return on Idli: strong. Experiments welcome, fire alarm optional.</p></div>
+        <div class="info"><h3>Communication SLA</h3><p>Responses within reasonable human time; escalations handled with candor and snacks.</p></div>
+        <div class="info"><h3>Weekend Throughput</h3><p>Balanced mix of rest, adventure, and not ignoring that laundry exists.</p></div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <h2>Relationship Roadmap</h2>
+      <div class="card pad timeline">
+        <div class="dot"><strong>Phase 1 — Due Diligence:</strong> Coffee, park walk, and a mutually agreed tiny embarrassment to bond over.</div>
+        <div class="dot"><strong>Phase 2 — Integration:</strong> Shared playlists, collaborative grocery lists, and co‑authored inside jokes.</div>
+        <div class="dot"><strong>Phase 3 — Scaling:</strong> Meeting friends, festival planning, and optimizing travel snack packs.</div>
+        <div class="dot"><strong>Phase 4 — Sustain:</strong> Healthy routines, bigger dreams, and remembering to water the plants.</div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Core Skills</h2>
+      <div class="grid cols-3">
+        <div class="info"><h3>Conversation</h3><p>Curious questions, zero interrupting, and strong “tell me more” energy.</p></div>
+        <div class="info"><h3>Logistics</h3><p>Plans that actually work, with backups for when they don’t.</p></div>
+        <div class="info"><h3>Care</h3><p>Checking in, showing up, and making sure you ate.</p></div>
+      </div>
+    </section>
+
+    <section id="table" class="card pad">
+      <h2>Competitive Advantages</h2>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Me</th><th>Industry Average</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Honesty</td><td>Audited 10/10</td><td>Unverified</td></tr>
+          <tr><td>Humor</td><td>Dry with sudden whimsy</td><td>Varies</td></tr>
+          <tr><td>Listening</td><td>No phone zone</td><td>“Huh? Sorry?”</td></tr>
+          <tr><td>Memories</td><td>Remembers your tea order</td><td>Forgets birthdays</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="testimonials">
+      <h2>Testimonials (100% Real People)</h2>
+      <div class="grid cols-3">
+        <div class="quote">“Shows up on time and brings extra napkins. Who does that? A keeper.” — A Friend</div>
+        <div class="quote">“Responsible, witty, and doesn’t run from difficult chats.” — Former Group Project Member</div>
+        <div class="quote">“Five stars. Would debate pizza toppings again.” — Anonymous Diner</div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="grid cols-2">
+        <div class="info"><h3>What’s your idea of a good date?</h3><p>Simple, thoughtful, and lightly planned: walk, food, bookstore, laughter.</p></div>
+        <div class="info"><h3>Non‑negotiables?</h3><p>Respect, honesty, and cheering for each other’s goals.</p></div>
+        <div class="info"><h3>Big ick?</h3><p>Ghosting. Also lying about liking pineapple while secretly loving it.</p></div>
+        <div class="info"><h3>Hidden talent?</h3><p>Turning dull errands into mini adventures.</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="card pad">
+      <h2>Next Steps</h2>
+      <p class="lead">If you’ve made it this far, congratulations: you’re compatible with good typography and gentle sarcasm.</p>
+      <form onsubmit="event.preventDefault(); this.reset(); alert('Application received. HR (Heart Resources) will be in touch.');" style="display:grid; gap:12px; grid-template-columns: repeat(2, 1fr);">
+        <label>Full Name<br><input required type="text" placeholder="Your good name" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:#0f1320; color:var(--text);"></label>
+        <label>Contact<br><input required type="email" placeholder="email@example.com" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:#0f1320; color:var(--text);"></label>
+        <label style="grid-column:1/-1;">Cover Message<br><textarea rows="4" placeholder="Convince HR in 2–3 lines" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:#0f1320; color:var(--text);"></textarea></label>
+        <div style="grid-column:1/-1; display:flex; gap:10px; align-items:center;">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree that laughing at bad puns counts as cardio.</label>
+        </div>
+        <div style="grid-column:1/-1; display:flex; gap:12px;">
+          <button class="btn primary" type="submit">Submit Application</button>
+          <a class="btn" href="#top">Back to Top</a>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    © <span id="y"></span> Varad • Built with HTML, CSS, and a suspicious amount of confidence.
+  </footer>
+
+  <script>
+    // Set year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
